@@ -20,21 +20,29 @@ public class Mamifero {
         this.identificador = identificador;
         this.especie = especie;
         this.fechaNacimiento = fechaNacimiento;
+        padre = null;
+        madre = null;
     }
 
     public boolean tieneComoAncestro(Mamifero unMamifero){
         boolean encontre = false;
-        while (!encontre){
             if (unMamifero != null){
-                if ((padre != null) && (padre.getIdentificador().equals(unMamifero.getIdentificador()))){
-                   encontre = true;
-                }else{
-                    if ((madre != null) && (madre.getIdentificador().equals(unMamifero.getIdentificador()))){
+                if (padre != null) {
+                    if (padre.getIdentificador().equals(unMamifero.getIdentificador())){
                         encontre = true;
+                    }else{
+                        encontre = padre.tieneComoAncestro(unMamifero);
                     }
                 }
+                if (!encontre){
+                if (madre != null){
+                    if (madre.getIdentificador().equals(unMamifero.getIdentificador())){
+                        encontre = true;
+                    }else{
+                        encontre = madre.tieneComoAncestro(unMamifero);
+                    }
+                }}
             }
-        }
         return encontre;
     }
     public Mamifero getAbueloMaterno(){
