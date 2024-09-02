@@ -1,0 +1,19 @@
+Tarea 1
+Mejorar la balanza para que recuerde los productos ingresados (los mantenga en una colección). Analice de qué forma puede realizarse este nuevo requerimiento e implemente el mensaje
+public List<Producto> getProductos() que retorna todos los productos ingresados a la balanza (en la compra actual, es decir, desde la última vez que se la puso a cero).
+
+¿Qué cambio produce este nuevo requerimiento en el mensaje ponerEnCero() ?
+Que tiene que vaciar la lista.
+
+¿Es necesario, ahora, almacenar los totales en la balanza? ¿Se pueden obtener estos valores de otra forma?
+No es necesario, porque se puede obtener apartir de la lista de productos.
+
+Tarea 2
+Con esta nueva funcionalidad, podemos enriquecer al Ticket, haciendo que él también conozca a los productos (a futuro podríamos imprimir el detalle). Ticket también debería entender el mensaje  public List<Producto> getProductos().
+
+¿Qué cambios cree necesarios en Ticket para que pueda conocer a los productos?
+Que en el contructor se le pase la lista con los productos
+
+Tarea 3
+Después de hacer estos cambios, ¿siguen pasando los tests? ¿Está bien que sea así?
+En mi caso si, porque superpuse los constructores. Pero si no lo haria no pasaria, ya que cambiarian la firma de los constructores.
