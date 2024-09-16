@@ -1,18 +1,26 @@
 package ar.edu.unlp.oo1.ejercicio3;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class ItemTest {
 
-class ItemTest {
-    Item i1;
-    @BeforeEach
-    void setUp() throws Exception{
-        i1 = new Item("pan",2,100);
-    }
-    @Test
-    void costo() {
-        assertEquals(i1.costo(), 200);
-    }
+  private Item item;
+
+  @BeforeEach
+  public void setUp() {
+    item = new Item("azucar", 2, 60);
+  }
+
+  @Test
+  public void testCosto() {
+    assertEquals(120, item.costo());
+  }
+
+  @Test
+  public void testCostoUnitario() {
+    assertEquals(60, item.getCostoUnitario());
+  }
 }

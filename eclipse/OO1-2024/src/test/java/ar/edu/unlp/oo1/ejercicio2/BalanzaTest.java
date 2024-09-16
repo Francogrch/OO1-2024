@@ -1,5 +1,4 @@
 package ar.edu.unlp.oo1.ejercicio2;
-import ar.edu.unlp.oo1.ejercicio2.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,11 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanzaTest {
- 
+
   private Balanza balanza;
-  
+
   private Producto queso;
-  
+
   private Producto jamon;
 
   @BeforeEach
@@ -51,8 +50,8 @@ public class BalanzaTest {
     assertEquals(1, balanza.getCantidadDeProductos());
     balanza.agregarProducto(jamon);
     assertEquals(2, balanza.getCantidadDeProductos());
-  }  
-  
+  }
+
   @Test
   void testEmitirTicket() {
     balanza.agregarProducto(queso);
@@ -83,7 +82,7 @@ public class BalanzaTest {
     assertEquals(0.1, balanza.getPesoTotal());
     balanza.agregarProducto(jamon);
     assertEquals(0.2, balanza.getPesoTotal());
-  }  
+  }
 
   @Test
   void testPonerEnCero() {
@@ -92,7 +91,7 @@ public class BalanzaTest {
     assertEquals(0, balanza.getPesoTotal());
     assertEquals(0, balanza.getPrecioTotal());
     assertEquals(0, balanza.getCantidadDeProductos());
-  }  
+  }
 
   @Test
   void testPrecioTotal() {
@@ -101,5 +100,5 @@ public class BalanzaTest {
     assertEquals(14, balanza.getPrecioTotal());
     balanza.agregarProducto(jamon);
     assertEquals(23, balanza.getPrecioTotal());
-  }  
+  }
 }

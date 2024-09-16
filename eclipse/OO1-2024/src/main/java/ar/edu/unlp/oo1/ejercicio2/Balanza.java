@@ -1,56 +1,50 @@
 package ar.edu.unlp.oo1.ejercicio2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Balanza {
-    private double precioTotal;
-    private double pesoTotal;
-    private List<Producto> productos;
+  private double precioTotal;
+  private double pesoTotal;
+  private int cantidadDeProductos;
 
-    public Balanza(){
-        productos = new ArrayList<>();
-        precioTotal = 0;
-        pesoTotal = 0;
-    }
+  public Balanza() {
+    cantidadDeProductos = 0;
+    precioTotal = 0;
+    pesoTotal = 0;
+  }
 
-    public void ponerEnCero(){
-        productos.clear();
-        precioTotal = 0;
-        pesoTotal = 0;
-    }
-    public void agregarProducto(Producto p){
-        precioTotal+= p.getPrecio();
-        pesoTotal+= p.getPeso();
-        productos.add(p);
-    }
-    public Ticket emitirTicket(){
-        return new Ticket(this.getCantidadDeProductos(),pesoTotal,precioTotal);
-    }
-    public int getCantidadDeProductos(){
-        return productos.size();
-    }
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
+  public void ponerEnCero() {
+    precioTotal = 0;
+    pesoTotal = 0;
+    cantidadDeProductos = 0;
+  }
 
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
-    }
+  public void agregarProducto(Producto p) {
+    precioTotal += p.getPrecio();
+    pesoTotal += p.getPeso();
+    cantidadDeProductos += 1;
+  }
 
-    public double getPesoTotal() {
-        return pesoTotal;
-    }
+  public Ticket emitirTicket() {
+    return new Ticket(this.getCantidadDeProductos(), pesoTotal, precioTotal);
+  }
 
-    public void setPesoTotal(double pesoTotal) {
-        this.pesoTotal = pesoTotal;
-    }
+  public int getCantidadDeProductos() {
+    return cantidadDeProductos;
+  }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
+  public double getPrecioTotal() {
+    return precioTotal;
+  }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
+  public void setPrecioTotal(double precioTotal) {
+    this.precioTotal = precioTotal;
+  }
+
+  public double getPesoTotal() {
+    return pesoTotal;
+  }
+
+  public void setPesoTotal(double pesoTotal) {
+    this.pesoTotal = pesoTotal;
+  }
+
 }
