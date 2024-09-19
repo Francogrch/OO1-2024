@@ -53,6 +53,11 @@ public class Mamifero {
     return encontre;
   }
 
+  private boolean buscarRama(Mamifero unMamifero) {
+    return this.equals(unMamifero) || (this.tienePadre() && padre.buscarRama(unMamifero))
+        || (this.tieneMadre() && madre.buscarRama(unMamifero));
+  }
+
   private boolean buscarRamaMadre(Mamifero unMamifero) {
     boolean encontre = false;
     if (this.tieneMadre()) {
@@ -64,7 +69,7 @@ public class Mamifero {
     return encontre;
   }
 
-  public boolean tieneComoAncestroA(Mamifero unMamifero) {
+  public boolean tieneComoAncestroA2(Mamifero unMamifero) {
     boolean encontre = false;
     if (unMamifero != null) {
       if (!this.equals(unMamifero)) {
@@ -75,6 +80,12 @@ public class Mamifero {
       }
     }
     return encontre;
+  }
+
+  public boolean tieneComoAncestroA(Mamifero unMamifero) {
+    return (!this.equals(unMamifero)
+        && ((this.tienePadre() && this.padre.buscarRama(unMamifero))
+            || (this.tieneMadre() && this.madre.buscarRama(unMamifero))));
   }
 
   public Mamifero getAbueloMaterno() {
