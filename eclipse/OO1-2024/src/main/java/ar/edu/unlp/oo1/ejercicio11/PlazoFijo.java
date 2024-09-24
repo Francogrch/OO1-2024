@@ -13,9 +13,12 @@ public class PlazoFijo implements Inversion {
     this.porcentajeDeInteresDiario = porcentajeDeInteresDiario;
   }
 
-  public double valorActual() {
+  private int cantDias() {
     LocalDate hoy = LocalDate.now();
-    int cantDias = fechaDeConstitucion.until(hoy).getDays();
-    return (montoDepositado * ((1 + porcentajeDeInteresDiario) * (cantDias)));
+    return fechaDeConstitucion.until(hoy).getDays();
+  }
+
+  public double valorActual() {
+    return (montoDepositado * ((1 + porcentajeDeInteresDiario) * (cantDias())));
   }
 }
