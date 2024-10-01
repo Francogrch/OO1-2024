@@ -15,10 +15,12 @@ public class ReporteDeConstruccionTest {
     reporte1 = new ReporteDeConstruccion();
     reporte2 = new ReporteDeConstruccion();
 
-    Cilindro c1 = new Cilindro(1, 2, "hierro", "azul");
-    PrismaRectangular p1 = new PrismaRectangular(1, 2, 3, "hierro", "verde");
-    Esfera e1 = new Esfera(1, "plomo", "azul");
-
+    Cilindro c1 = new Cilindro(3, 5, "hierro", "azul");
+    // s 151, v 141
+    PrismaRectangular p1 = new PrismaRectangular(6, 4, 8, "hierro", "verde");
+    // s 206, v 192
+    Esfera e1 = new Esfera(4, "plomo", "azul");
+    // s 201, v 268
     reporte1.addPieza(c1);
     reporte1.addPieza(p1);
     reporte1.addPieza(e1);
@@ -29,18 +31,18 @@ public class ReporteDeConstruccionTest {
 
   @Test
   void getVolumenDeMaterialTest() {
-    assertEquals(reporte1.getVolumenDeMaterial("hierro"), 12);
-    assertEquals(reporte1.getVolumenDeMaterial("plomo"), 12);
-    assertEquals(reporteVacio.getVolumenDeMaterial("plata"), 0);
-    assertEquals(reporte2.getVolumenDeMaterial("plata"), 0);
+    assertEquals(reporte1.getVolumenDeMaterial("hierro"), 333); // 141 + 192
+    assertEquals(reporte1.getVolumenDeMaterial("plomo"), 268); // 268
+    assertEquals(reporteVacio.getVolumenDeMaterial("hierro"), 0); // 0
+    assertEquals(reporte2.getVolumenDeMaterial("plata"), 0); // 0
   }
 
   @Test
   void getSuperficieDeColorTest() {
-    assertEquals(reporteVacio.getSuperficieDeColor("blanco"), 0);
-    assertEquals(reporte1.getSuperficieDeColor("azul"), 12);
-    assertEquals(reporte1.getSuperficieDeColor("verde"), 12);
-    assertEquals(reporte2.getSuperficieDeColor("blanco"), 0);
+    assertEquals(reporteVacio.getSuperficieDeColor("azul"), 0); // 0
+    assertEquals(reporte1.getSuperficieDeColor("azul"), 352); // 201 + 151
+    assertEquals(reporte1.getSuperficieDeColor("verde"), 208); // 208
+    assertEquals(reporte2.getSuperficieDeColor("blanco"), 0); // 0
   }
 
 }

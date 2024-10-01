@@ -1,8 +1,8 @@
 package ar.edu.unlp.oo1.ejercicio13;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ClienteDeCorreo {
   private List<Carpeta> carpetas;
@@ -18,20 +18,26 @@ public class ClienteDeCorreo {
   }
 
   public Email buscar(String texto) {
-    boolean encontre = false;
-    Iterator<Carpeta> it = carpetas.iterator();
-    Email e = new Email();
-    while (!encontre) {
-      e = it.next().buscarEmail(texto);
-      if (e != null) {
-        encontre = true;
-      }
-    }
-    return e;
+    Email retu = inbox.buscarEmail(texto);
+    return (retu != null) ? retu
+        : carpetas.stream().map(c -> c.buscarEmail(texto)).filter(e -> e != null)
+            .collect(Collectors.toList()).get(1);
+  }
+
+  public void agregarCarpeta(Carpeta carpeta) {
+    carpetas.add(carpeta);
   }
 
   public Integer espacioOcuapdo() {
     return (inbox.tamanio() + carpetas.stream().mapToInt(c -> c.tamanio()).sum());
+  }
+
+  public List<Carpeta> getCarpetas() {
+    return carpetas;
+  }
+
+  public Carpeta getInbox() {
+    return inbox;
   }
 
 }

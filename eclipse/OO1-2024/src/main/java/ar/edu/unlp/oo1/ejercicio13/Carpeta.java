@@ -32,4 +32,8 @@ public class Carpeta {
   public Integer tamanio() {
     return emails.stream().mapToInt(e -> e.tamanio()).sum();
   }
+
+  public List<Email> getEmails() {
+    return emails;
+  }
 }
