@@ -7,11 +7,13 @@ public class Usuario {
   private String nombre;
   private String domicilio;
   private List<Consumo> consumos;
+  private List<Factura> facturas;
 
   public Usuario(String nombre, String domicilio) {
     this.nombre = nombre;
     this.domicilio = domicilio;
     consumos = new ArrayList<Consumo>();
+    facturas = new ArrayList<Factura>();
   }
 
   public void agregarConsumo(Consumo consumo) {
@@ -19,7 +21,12 @@ public class Usuario {
   }
 
   public Factura generarFactura() {
-    return new Factura(this, consumos.get(0));
+    Factura nueva = new Factura(this, consumos.get(0));
+    facturas.add(nueva);
+    return nueva;
   }
 
+  public List<Factura> getFacturas() {
+    return facturas;
+  }
 }

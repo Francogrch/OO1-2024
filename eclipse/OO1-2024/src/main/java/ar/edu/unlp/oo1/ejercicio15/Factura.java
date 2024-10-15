@@ -7,14 +7,15 @@ public class Factura {
   private LocalDate fecha;
   private double bonificacion;
   private double montoFinal;
-  private static double cuadroTarifario;
+  private double tarifaActual;
 
   public Factura(Usuario usuario, Consumo consumo) {
     this.usuario = usuario;
     fecha = LocalDate.now();
-    montoFinal = (consumo.getEnergiaActiva() * cuadroTarifario);
+    tarifaActual = CuadroTarifario.getTarifa();
+    montoFinal = (consumo.getEnergiaActiva() * tarifaActual);
     if (getFpe(consumo) > 0.8) {
-      bonificacion = 1.10;
+      bonificacion = 0.90;
     } else {
       bonificacion = 1;
     }
@@ -24,30 +25,6 @@ public class Factura {
   private double getFpe(Consumo consumo) {
     return (consumo.getEnergiaActiva())
         / (Math.sqrt((Math.pow(consumo.getEnergiaActiva(), 2) + Math.pow(consumo.getEnergiaReactiva(), 2))));
-  }
-
-  public void setCuadroTarifario(double cuadroTarifario) {
-    this.cuadroTarifario = cuadroTarifario;
-  }
-
-  public Usuario getUsuario() {
-    return usuario;
-  }
-
-  public LocalDate getFecha() {
-    return fecha;
-  }
-
-  public double getBonificacion() {
-    return bonificacion;
-  }
-
-  public double getMontoFinal() {
-    return montoFinal;
-  }
-
-  public static double getCuadroTarifario() {
-    return cuadroTarifario;
   }
 
 }
