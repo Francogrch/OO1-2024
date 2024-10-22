@@ -16,8 +16,7 @@ public class EvenNumberSet implements Set<Integer> {
   @Override
   public boolean add(Integer n) {
     if ((n % 2 == 0) && (!lista.contains(n))) {
-      lista.add(n);
-      return true;
+      return lista.add(n);
     }
     return false;
   }

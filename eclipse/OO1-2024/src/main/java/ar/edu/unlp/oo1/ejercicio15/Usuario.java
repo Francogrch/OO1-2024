@@ -21,8 +21,10 @@ public class Usuario {
   }
 
   public Factura generarFactura() {
-    Factura nueva = new Factura(this, consumos.get(0));
-    facturas.add(nueva);
+    Factura nueva = new Factura(this, consumos.get((consumos.size() - 1)));
+    if (!facturas.contains(nueva)) {
+      facturas.add(nueva);
+    }
     return nueva;
   }
 

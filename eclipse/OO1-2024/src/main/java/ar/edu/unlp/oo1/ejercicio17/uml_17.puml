@@ -1,17 +1,8 @@
 @startuml
-
-class OOBnB {
-+ periodoDisponible(p:Propiedad): boolean
-+ crearReserva(periodo: DateLapse, propiedad: Propiedad)
-+ calcularPrecio(reserva: Reserva): Real
-+ cancelarReserva(reserva: Reserva)
-+ calcularIngreso(periodo: DateLapse, propietario: Usuario)
-}
-
 class Usuario{
 - nombre:String
 - direccion:String
-- dni: integer;
+- dni: Integer;
 + calcularIngreso(periodo:DateLapse): Real
 }
 
@@ -22,19 +13,19 @@ class Propiedad{
 + disponible(periodo: DateLapse): boolean
 + crearReserva(periodo: DateLapse)
 + calcularIngreso(periodo:DateLapse): Real
++ cancelar(periodo:DateLapse): boolean
 }
 
 class Reserva{
 - periodo: DateLapse
 + calcularPrecio(): Real
 + calcularPrecio(periodo:DateLapse): Real
++ overlap(periodo: DateLapse): boolean
++ cancelar(): boolean
 }
 
-OOBnB -> Usuario : -usuarios 0..*
 Usuario -> Propiedad : -propiedades 0..*
 Propiedad -> Reserva : -reservas 0..*
-Reserva -> Propiedad : -propiedad 1
-
-
-
+Reserva -> Propiedad : -propiedad
 @enduml
+

@@ -1,0 +1,44 @@
+abstract Usuario {
+- nombre: String
+- direccion: String
++ agregarEnvio(envio: Envio): boolean
++ {abstract} montoAPagar(from:LocalDate,to:LocalDate): Real
+}
+Usuario -> Envio : envios 0..*
+
+
+class UsuarioPersona{
+- dni: String
++ montoAPagar(): Real
+}
+UsuarioPersona -> Usuario
+
+class UsuarioEmpresa{
+- cuit: String
++ montoAPagar(): Real
+}
+UsuarioEmpresa -> Usuario
+
+abstract Envio{
+- fecha: LocalDate
+- origen: String
+- destino: String
+- peso: Real
++{abstract} monto(): Real
++overlap(from:LocalDate,to:LocalDate): boolean 
++getPeso(): Real 
+}
+class EnvioLocal{
+- entregaRapida: boolean
++monto():Real
+}
+EnvioLocal -> Envio
+class EnvioInterurbano{
+-km: Integer
++ monto(): Real
+}
+EnvioInterurbano -> Envio
+class EnvioInternacional{
++monto(): Real
+}
+EnvioInternacional -> Envio

@@ -4,13 +4,14 @@ public class CuadroTarifario {
   private static double tarifa;
 
   public CuadroTarifario() {
+    tarifa = 10;
   }
 
   public static double getTarifa() {
     return tarifa;
   }
 
-  public void setTarifa(double tarifa) {
+  public static void setTarifa(double tarifa) {
     CuadroTarifario.tarifa = tarifa;
   }
 }

@@ -1,0 +1,2 @@
+Utilice dos implementaciones, una que extiende a la clase LinkedHashSet y solamente tengo que reescribir el metodo agregar. La otra implementacion es utilizando otra coleccion y extendiendo de la interfaz Set.
+En la primer implementacion EveSetNumberSetWithSet delego la responsabilidad a la clase que hereda, y en la segunda toda la responsabilidad y definicion de la clase esta en la misma.

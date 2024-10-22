@@ -27,4 +27,12 @@ public class Factura {
         / (Math.sqrt((Math.pow(consumo.getEnergiaActiva(), 2) + Math.pow(consumo.getEnergiaReactiva(), 2))));
   }
 
+  public double getMontoFinal() {
+    return montoFinal;
+  }
+
+  public double getBonificacion() {
+    return bonificacion;
+  }
+
 }

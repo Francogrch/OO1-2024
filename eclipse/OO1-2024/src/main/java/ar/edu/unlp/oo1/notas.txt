@@ -1,3 +1,2 @@
-Falta test de punto 15
-Falta test de punto 16
-
+18 no implentado
+19 sin tests
