@@ -1,0 +1,64 @@
+' El unico atributo que comparten es fecha Inicio, es necesario hacer la clase abstracta?
+' ContratoDePlanta necesita informacion de Empleado, lo mejor es tener una variable que apunte a ese objeto o guardamos un atributo y corremos el riesgo que en el futuro no cambie?
+' En esta implementacion creo que no es del todo correcta, ya que el Recibo tendria que ser el responsable de calcular su atributo monto y no los Contratos, el problema esta en que perderia la posibilidad de utilizar polimorfismo
+' El contrato debe conocer al Empleado, esa informacion tiene que estar dentro. No me imagino un contrato que no tenga esa informacion.
+@startuml
+
+class Empleado {
+- nombre: String
+- apellido: String
+- cuil: Integer
+- fechaNac: LocalDate
+- hijos: Integer
+- coyuge: Integer
++ <<create>> Empleado(nombre:String,apellido:String,cuil:Integer,fechaNac:LocalDate,hijos:Integer)
++ generarRecibo(): Recibo
++ agregarContrato(contrato: Contrato)
++ getAntiguedad(): Integer
+}
+Empleado -> Contrato : -contratos 0..*
+Empleado -> Recibo : -recibos 0..*
+
+
+abstract Contrato {
+- empleado: Empleado
+- fechaInicio: LocalDate
++ <<abstract>> esVigente(): Boolean
++ <<abstract>> monto(): Real
++ <<abstract>> mesesTrabajados(): Integer
+}
+Contrato --> Empleado : empleado
+
+class ContratoPorHoras{
+-horas: Integer
+-valorHoras: Real
+-fechaFin: : LocalDate
++ <<create>> ContratoPorHoras(fechaInicio:LocalDate, fechaFin:LocalDate,empleado:Empleado, horas: Integer, valorHoras: Real)
++ monto(): Real
++ esVigente(): Boolean
++ mesesTrabajados(): Integer
+}
+ContratoPorHoras --> Contrato
+
+class ContratoDePlanta {
+-sueldoMensual: Real
+-montoConyuge: Real
+-montoHijos: Real
++ <<create>> ContratoDePlata(fechaInicio: LocalDate, sueldoMensual: Real, montoConyuge: Real, montoHijos: Real, empleado: Empleado)
++ monto(): Real
++ esVigente(): Boolean
++ mesesTrabajados(): Integer
+}
+ContratoDePlanta --> Contrato
+
+class Recibo {
+- nombre: String
+- apellido: String
+- cuil: Integer
+- antiguedad: Integer
+- fecha: LocalDate
+- montoAcobrar: Real
++ <<create>> Recibo (nombre: String, apellido:String, cuil: Integer,antiguedad: Integer, montoACobrar: Real)
+}
+
+@enduml
