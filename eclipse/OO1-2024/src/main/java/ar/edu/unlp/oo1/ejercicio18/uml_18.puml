@@ -1,47 +1,60 @@
 @startuml
-class Usuario{
-- nombre:String
-- direccion:String
-- dni: Integer;
-+ calcularIngreso(periodo:DateLapse): Real
-}
 
-class Propiedad{
-- direccion: String
+class Empleado {
 - nombre: String
-- precioNoche: Real
-+ disponible(periodo: DateLapse): boolean
-+ crearReserva(periodo: DateLapse)
-+ calcularIngreso(periodo:DateLapse): Real
-+ cancelar(periodo:DateLapse): Real
+- apellido: String
+- cuil: Integer
+- fechaNac: LocalDate
+- hijos: Integer
+- coyuge: Integer
++ <<create>> Empleado(nombre:String,apellido:String,cuil:Integer,fechaNac:LocalDate,hijos:Integer)
++ generarRecibo(): Recibo
++ agregarContrato(contrato: Contrato)
++ getAntiguedad(): Integer
+}
+Empleado -d-> Contrato : -contratos 0..*
+Empleado -> Recibo : -recibos 0..*
+
+
+abstract Contrato {
+- empleado: Empleado
+- fechaInicio: LocalDate
++ <<abstract>> esVigente(): Boolean
++ <<abstract>> monto(): Real
++ <<abstract>> mesesTrabajados(): Integer
+}
+Contrato -u-> Empleado : empleado
+
+class ContratoPorHoras extends Contrato{
+-horas: Integer
+-valorHoras: Real
+-fechaFin: : LocalDate
++ <<create>> ContratoPorHoras(fechaInicio:LocalDate, fechaFin:LocalDate,empleado:Empleado, horas: Integer, valorHoras: Real)
++ monto(): Real
++ esVigente(): Boolean
++ mesesTrabajados(): Integer
 }
 
-class Reserva{
-- periodo: DateLapse
-+ calcularPrecio(): Real
-+ calcularPrecio(periodo:DateLapse): Real
-+ overlap(periodo: DateLapse): boolean
-+ cancelar(): boolean
-- antesDeInicio(): boolean
+
+class ContratoDePlanta extends Contrato{
+-sueldoMensual: Real
+-montoConyuge: Real
+-montoHijos: Real
++ <<create>> ContratoDePlata(fechaInicio: LocalDate, sueldoMensual: Real, montoConyuge: Real, montoHijos: Real, empleado: Empleado)
++ monto(): Real
++ esVigente(): Boolean
++ mesesTrabajados(): Integer
 }
-interface PoliticaReserva{
-+ valorReembolso(fechaInicio: LocalDate): Integer
+
+
+class Recibo {
+- nombre: String
+- apellido: String
+- cuil: Integer
+- antiguedad: Integer
+- fecha: LocalDate
+- montoAcobrar: Real
++ <<create>> Recibo (nombre: String, apellido:String, cuil: Integer,antiguedad: Integer, montoACobrar: Real)
 }
-class PoliticaFlexible{
-+ valorReembolso(fechaInicio: LocalDate): Integer
-}
-class PoliticaModerada{
-+ valorReembolso(fechaInicio: LocalDate): Integer
-}
-class PoliticaEstricta{
-+ valorReembolso(fechaInicio: LocalDate): Integer
-}
-Usuario -> Propiedad : - propiedades 0..*
-Propiedad -> Reserva : - reservas 0..*
-Propiedad -> PoliticaReserva : - politica
-Reserva -> Propiedad : - propiedad
-PoliticaModerada ..|> PoliticaReserva
-PoliticaEstricta ..|> PoliticaReserva
-PoliticaFlexible ..|> PoliticaReserva
+
 @enduml
-

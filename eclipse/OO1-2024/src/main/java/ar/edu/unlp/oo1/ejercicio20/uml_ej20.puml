@@ -1,7 +1,3 @@
-' El unico atributo que comparten es fecha Inicio, es necesario hacer la clase abstracta?
-' ContratoDePlanta necesita informacion de Empleado, lo mejor es tener una variable que apunte a ese objeto o guardamos un atributo y corremos el riesgo que en el futuro no cambie?
-' En esta implementacion creo que no es del todo correcta, ya que el Recibo tendria que ser el responsable de calcular su atributo monto y no los Contratos, el problema esta en que perderia la posibilidad de utilizar polimorfismo
-' El contrato debe conocer al Empleado, esa informacion tiene que estar dentro. No me imagino un contrato que no tenga esa informacion.
 @startuml
 
 class Empleado {

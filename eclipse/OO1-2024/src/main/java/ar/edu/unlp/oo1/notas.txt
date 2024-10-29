@@ -1,2 +1,3 @@
-18 no implentado
-19 sin tests
+Sin tests:
+18,19,20
+

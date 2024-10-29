@@ -7,17 +7,15 @@ abstract Usuario {
 Usuario -> Envio : envios 0..*
 
 
-class UsuarioPersona{
+class UsuarioPersona extends Usuario{
 - dni: String
 + montoAPagar(): Real
 }
-UsuarioPersona -> Usuario
 
-class UsuarioEmpresa{
+class UsuarioEmpresa extends Usuario{
 - cuit: String
 + montoAPagar(): Real
 }
-UsuarioEmpresa -> Usuario
 
 abstract Envio{
 - fecha: LocalDate
@@ -28,17 +26,14 @@ abstract Envio{
 +overlap(from:LocalDate,to:LocalDate): boolean 
 +getPeso(): Real 
 }
-class EnvioLocal{
+class EnvioLocal extends Envio{
 - entregaRapida: boolean
 +monto():Real
 }
-EnvioLocal -> Envio
-class EnvioInterurbano{
+class EnvioInterurbano extends Envio{
 -km: Integer
 + monto(): Real
 }
-EnvioInterurbano -> Envio
-class EnvioInternacional{
+class EnvioInternacional extends Envio{
 +monto(): Real
 }
-EnvioInternacional -> Envio
