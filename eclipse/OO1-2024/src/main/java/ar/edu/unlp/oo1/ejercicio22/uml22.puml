@@ -1,0 +1,42 @@
+@startuml
+
+class ClienteDeCorreo {
++recibir(email:Email)
++buscar(texto: String): Email
++espacioOcupado():Integer
++agregarCarpeta(carpeta:Carpeta)
+}
+
+class Carpeta{
+-nombre: String
++getNombre():String
++mover(email:Email, destino: Carpeta)
++agregarEmail(email: Email)
++buscarEmail(texto:String): Email
++tamanio():Integer
++tamanioCategoria():Map<String,Integer>
+}
+
+class Email{
+-titulo:String
+-cuerpo:String
++getCuerpo():String
++getTitulo():String
++tieneTexto(texto: String): boolean
++tamanio():Integer
++categoriaTamanio():String
+}
+
+class Archivo{
+-nombre:String
++tamanio():Integer
+}
+
+ClienteDeCorreo -> Carpeta : inbox 1
+ClienteDeCorreo -> Carpeta : carpetas 0..*
+
+Carpeta -> Email : emails 0..*
+
+Email -> Archivo : adjuntos 0..*
+
+@enduml

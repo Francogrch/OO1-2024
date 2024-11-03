@@ -1,3 +1,9 @@
 Sin tests:
 18,19,20
 
+punto 23:
+  Tanto Cliente como Vendedor tienen una lista. Esos elementos necesitan conocer a su propietario? 
+Envio necesita las direcciones de Cliente y de Vendedor, el envio tiene que tener dos atributos que tengan estas direcciones, o se tiene hacer de manera de dinamica, pero si se hace de esta manera, vamos a tener bidireccionalidad. Al tratar de calcular el costo desde el Pedido, necesitaos para calcular el envio las direcciones, entonces guardamos dos variables de instancia de CLiente y Vendedor, dando a conocer estos al Pedido, para luego utilizar las direcciones para calcular el costo del Envio.
+
+Cual de las dos implementaciones es la correcta?
+

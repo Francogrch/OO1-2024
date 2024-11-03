@@ -1,0 +1,64 @@
+@startuml
+abstract Persona{
+-nombre:String
+-direccion:String
++<<create>> Persona(nombre:String,direccion:String)
+}
+class Vendedor extends Persona{
++agregarProducto(producto:Producto):boolean
+}
+Vendedor -> Producto : -productos
+
+class Cliente extends Persona{
++crearPedido(formaPago:Pago,formaEnvio:Envio,producto:Producto,cant:Integer)
++cantCategoria(categoria:String):Integer
+}
+Cliente -> Pedido : -pedidos
+
+interface Envio{
++costo(direccionVendedor:String,direccionCliente:String): Real
+}
+
+interface Pago{
++precio(valor:Real):Real
+}
+
+class Pedido {
+-cant:Integer
++<<create>>Pedido(formaPago:Pago,formaEnvio:Envio,producto:Producto,cant:Integer)
++costoTotal():Real
++compararCategoria(categoria:String):boolean
+}
+Pedido -> Pago : -pago
+Pedido -> Envio : -envio
+Pedido -> Producto : -producto
+Pedido -> Cliente : -cliente
+Pedido -> Vendedor : -vendedor
+
+class Producto {
+- nombre:String
+- categoria:String
+- precio:Real
+- cant:Integer
++ hayStock(cant:Integer): boolean
++ stockSuficiente(cant:Integer): boolean
++ mismaCategoria(otraCategoria:String):boolean
+}
+class alContado extends Pago{
++precio(valor:Real):Real
+}
+class cuotas6 extends Pago{
++precio(valor:Real):Real
+}
+class retirarComercio extends Envio{
++costo(direccionVendedor:String,direccionCliente:String): Real
+}
+class retirarSucursal extends Envio{
++costo(direccionVendedor:String,direccionCliente:String): Real
+}
+class expressDomicilio extends Envio{
++costo(direccionVendedor:String,direccionCliente:String): Real
+}
+@enduml
+
+
