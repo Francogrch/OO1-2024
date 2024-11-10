@@ -1,22 +1,18 @@
+
 @startuml
-abstract Persona{
+class Usuario{
 -nombre:String
 -direccion:String
 +<<create>> Persona(nombre:String,direccion:String)
-}
-class Vendedor extends Persona{
 +agregarProducto(producto:Producto):boolean
-}
-Vendedor -> Producto : -productos
-
-class Cliente extends Persona{
 +crearPedido(formaPago:Pago,formaEnvio:Envio,producto:Producto,cant:Integer)
 +cantCategoria(categoria:String):Integer
 }
-Cliente -> Pedido : -pedidos
+Usuario -> Pedido : -pedidos 0..*
+Usuario -> Producto : -productos 0..*
 
-interface Envio{
-+costo(direccionVendedor:String,direccionCliente:String): Real
+abstract Envio{
++costo(): Real
 }
 
 interface Pago{
@@ -32,8 +28,6 @@ class Pedido {
 Pedido -> Pago : -pago
 Pedido -> Envio : -envio
 Pedido -> Producto : -producto
-Pedido -> Cliente : -cliente
-Pedido -> Vendedor : -vendedor
 
 class Producto {
 - nombre:String
@@ -44,20 +38,23 @@ class Producto {
 + stockSuficiente(cant:Integer): boolean
 + mismaCategoria(otraCategoria:String):boolean
 }
-class alContado extends Pago{
+class alContado implements Pago{
 +precio(valor:Real):Real
 }
-class cuotas6 extends Pago{
+class cuotas6 implements Pago{
 +precio(valor:Real):Real
 }
 class retirarComercio extends Envio{
-+costo(direccionVendedor:String,direccionCliente:String): Real
++costo(): Real
 }
 class retirarSucursal extends Envio{
-+costo(direccionVendedor:String,direccionCliente:String): Real
++costo(): Real
 }
 class expressDomicilio extends Envio{
-+costo(direccionVendedor:String,direccionCliente:String): Real
+- direccionVendedor: String
+- direccionComprador: String
++<<create>> expressDomicilio( direccionVendedor: String, direccionComprador: String)
++costo(): Real
 }
 @enduml
 

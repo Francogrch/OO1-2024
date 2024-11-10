@@ -1,0 +1,53 @@
+@startuml
+
+class Vehiculo{
+-descripcion:String
+-capacidad:Integer
+-anio:Integer
+-valor:Real
++comision(monto:Real):Real
++calcularMonto(monto:Real):Real
+}
+Vehiculo -> Conductor : -duenio
+
+class Viaje{
+-origen:String
+-destino:String
+-costo:Real
+-fecha:LocalDate
++agregarPasajero(pasajero:Pasajero):boolean
++hayLugar():boolean
++costoViaje():Real
++costoViaje(cant:Integer):Real
++procesar():boolean
++hace30():boolean
++hace2():boolean
+}
+Viaje -> Vehiculo : -vehiculo
+Viaje -> Pasajero : -pasajeros 0..*
+
+abstract Usuario{
+-nombre:String
+-saldo:Real
++<<create>> Usuario(nombre:String, saldo:Real)
++pagar(monto:Real)
++cargarSaldo(monto:Real)
++saldoSuficiente(monto:Real):boolean
++<<abstract>> aCobrar(monto:Real):Real
++<<abstract>> aIngresar(monto:Real):Real
+}
+
+class Pasajero extends Usuario{
++ agregarViaje(viaje:Viaje): boolean
++ aCobrar(monto:Real):Real
++ aIngresar(monto:Real):Real
+}
+Pasajero -> Viaje : -viajes 0..*
+
+class Conductor extends Usuario{
++darAltaViaje(origen:String,destino:String, fecha:LocalDate, costo:Real):Viaje
++aCobrar(monto:Real):Real
++aIngresar(monto:Real):Real
+}
+Conductor -> Vehiculo : -vehiculo
+@enduml

@@ -12,14 +12,12 @@ public class Producto {
     this.cant = cant;
   }
 
-  public boolean hayStock(int cant) {
-    return this.cant >= cant;
-  }
-
-  public void stockSuficiente(int cant) {
-    if (hayStock(cant)) {
+  public boolean stockSuficiente(int cant) {
+    if (this.cant >= cant) {
       this.cant = this.cant - cant;
+      return true;
     }
+    return false;
   }
 
   public boolean mismaCategoria(String otraCategoria) {
@@ -28,5 +26,13 @@ public class Producto {
 
   public double getPrecio() {
     return precio;
+  }
+
+  public String getNombre() {
+    return nombre;
+  }
+
+  public int getCant() {
+    return cant;
   }
 }

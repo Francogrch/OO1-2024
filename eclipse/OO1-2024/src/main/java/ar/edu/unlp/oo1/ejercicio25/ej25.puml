@@ -1,0 +1,46 @@
+@startuml
+class Veterinario{
+-nombre:String
+-fecha: LocalDate
+-honorario:Real
++getAntiguedad(): Integer
+}
+
+class Mascota{
+-nombre:String
+-fecha:LocalDate
+-especie: String
++darAltaConsulta(medico:Veterinario):ConsultaMedica
++darAltaVacunacion(medico:Veterinario,nombre:String,costo:Real):Vacunacion
++darAltaGuarderia(cant:Integer):ServicioGuarderia
++utilizoMasDe5():boolean
++recaudacion(fecha:LocalDate):Real
+}
+Mascota -> Servicio : -servicios 0..*
+
+abstract Servicio{
+-fecha:LocalDate
++<<abstract>>costo(): Real
+
+}
+Servicio -> Mascota : -mascota
+class ServicioGuarderia extends Servicio{
+-cantDias:Integer
++costo():Real
+}
+
+
+abstract Consulta extends Servicio{
++<<abstract>> costo(): Real
+}
+Consulta -> Veterinario : -veterinario
+
+class ConsultaMedica extends Consulta{
++costo():Real
+} 
+class Vacunacion extends Consulta{
+-nombre:String
+-costo:Real
++costo():Real
+}
+@enduml
