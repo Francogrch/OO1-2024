@@ -32,6 +32,7 @@ class ServicioGuarderia extends Servicio{
 
 abstract Consulta extends Servicio{
 +<<abstract>> costo(): Real
++esDomingo(fecha:LocalDate):boolean
 }
 Consulta -> Veterinario : -veterinario
 
